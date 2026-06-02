@@ -21,8 +21,8 @@ jobs:
     - name: Build Module
       run: |
         export MY_NDK=${{ steps.setup-ndk.outputs.ndk-path }}
-        # Tải thư viện lõi của Zygisk
-        wget -qO src/zygisk.hpp https://raw.githubusercontent.com/topjohnwu/Magisk/master/native/src/zygisk/zygisk.hpp
+        # Link Zygisk.hpp mới chuẩn đét
+        wget -qO src/zygisk.hpp https://raw.githubusercontent.com/topjohnwu/Zygisk-Module-Sample/master/module/jni/zygisk.hpp
         
         mkdir -p build
         cd build
