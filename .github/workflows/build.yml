@@ -3,8 +3,6 @@ name: Build Zygisk Module
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
@@ -23,6 +21,9 @@ jobs:
     - name: Build Module
       run: |
         export MY_NDK=${{ steps.setup-ndk.outputs.ndk-path }}
+        # Tải thư viện lõi của Zygisk
+        wget -qO src/zygisk.hpp https://raw.githubusercontent.com/topjohnwu/Magisk/master/native/src/zygisk/zygisk.hpp
+        
         mkdir -p build
         cd build
         cmake -DCMAKE_TOOLCHAIN_FILE=${MY_NDK}/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-21 ../src
