@@ -34,8 +34,8 @@ class MyModule : public zygisk::ModuleBase {
 public:
     void onLoad(zygisk::Api *api, JNIEnv *env) override {
         LOGD("Zygisk Module Loaded!");
-        // Dùng sức mạnh gốc của Zygisk, không cần Dobby!
-        api->pltHookRegister(".*", "SSL_read", (void*)my_SSL_read, (void**)&orig_SSL_read);
+        // Ở Zygisk v4, dùng 0, 0 thay cho ".*" để hook toàn bộ ứng dụng
+        api->pltHookRegister(0, 0, "SSL_read", (void*)my_SSL_read, (void**)&orig_SSL_read);
         api->pltHookCommit();
     }
 };
